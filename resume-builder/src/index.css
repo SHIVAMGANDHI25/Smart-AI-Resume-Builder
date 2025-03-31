@@ -1,0 +1,171 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.bg-dark input[type="month"]::-webkit-calendar-picker-indicator {
+  filter: invert(1); /* Inverts color to match dark background */
+}
+
+
+.sidebar-container {
+  position: fixed;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  padding: 10px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+.sidebar-container button {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.sidebar-container button:hover {
+  background-color: #e0e0e0;
+}
+
+.sidebar-container button svg {
+  font-size: 20px;
+  color: #333;
+}
+
+body {
+  background: linear-gradient(135deg, #e0eafc, #cfdef3); /* Light mode */
+  transition: background 0.5s ease-in-out;
+}
+
+.dark-mode {
+  background: linear-gradient(135deg, #2c3e50, #4b79a1); /* Dark mode */
+  color: #e9e2e2 !important; /* Greyish text */
+}
+
+
+
+
+.resume-container {
+  background: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dark-mode .resume-container {
+  background: #1e1e1e;
+  box-shadow: 0px 4px 10px rgba(255, 255, 255, 0.1);
+}
+.backdrop {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(8px);
+  z-index: -1;
+}
+.resume-container {
+  width: 90%;
+  max-width: 800px;
+  margin: auto;
+  padding: 40px;
+}
+
+/* Light Mode */
+.light-mode input,
+.light-mode textarea {
+    background-color: white !important; /* White background */
+    color: black !important; /* Black text */
+    border: 1px solid #ccc !important;
+}
+
+.light-mode input::placeholder,
+.light-mode textarea::placeholder {
+    color: #666 !important; /* Slightly darker grey for contrast */
+}
+
+/* Dark Mode */
+.dark-mode input,
+.dark-mode textarea {
+    background-color: #1e1e1e !important; /* Dark grey background */
+    color: rgb(176, 176, 176) !important; /* Light grey text */
+    border: 1px solid #444 !important;
+}
+
+.dark-mode input::placeholder,
+.dark-mode textarea::placeholder {
+    color: #888 !important; /* Slightly darker grey */
+}
+
+.text-light-grey {
+  color: #b0b0b0 !important; /* Greyish text */
+}
+
+.bg-dark {
+  background-color: #000 !important; /* Keep background black */
+}
+
+input,
+textarea {
+  background-color: #1e1e1e !important; /* Dark grey background */
+  color: #b0b0b0 !important; /* Light grey text */
+  border: 1px solid #444 !important; /* Border for visibility */
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #888 !important; /* Slightly darker grey for contrast */
+}
+
+input:focus,
+textarea:focus {
+  border-color: #777 !important; /* Brighter border on focus */
+  outline: none !important;
+}
+
+.template-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.template-selection button {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+
+.template-selection button:hover,
+.template-selection .active {
+  background: #007bff;
+  color: white;
+}
+
+.template-selection button.active {
+  color: #007bff;
+  font-weight: bold;
+}

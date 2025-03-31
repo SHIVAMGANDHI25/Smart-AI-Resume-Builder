@@ -1,0 +1,50 @@
+.modal-body{
+  max-height: "60vh";
+  overflow-y: "auto";
+  padding: "15px"
+}  
+  @media print {
+    .exclude-from-export {
+      display: none !important;
+    }
+  }
+
+.resume-container {
+  width: 100%;
+  max-width: 900px; 
+  min-width: 300px;
+}
+
+#resume-preview {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  white-space: normal;
+}
+
+.resume-header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.resume-header p {
+  margin: 5px 10px;
+  font-size: 14px;
+}
+
+@media (max-width: 768px) {
+  .resume-container {
+    padding: 15px;
+  }
+
+  .resume-header p {
+    font-size: 12px;
+    word-break: break-word;
+  }
+
+  #resume-preview {
+    padding: 10px;
+  }
+}

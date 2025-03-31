@@ -1,0 +1,93 @@
+/* Resume Container - Make it Responsive */
+.resume-container {
+  width: 90%;  /* Use percentage instead of fixed width */
+  max-width: 800px;  /* Prevent it from being too wide */
+  margin: auto;
+  font-family: Arial, sans-serif;
+  background: #fff;
+  padding: 20px;
+  border: 2px solid #2C3E50;
+  border-radius: 8px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Ensure the entire preview fits within the screen */
+.preview-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  overflow: hidden;  /* Prevents horizontal scrolling */
+}
+
+/* Two-Column Layout Fix */
+.content {
+  display: flex;
+  flex-wrap: wrap; /* Allows columns to stack on small screens */
+  gap: 20px;
+}
+
+/* Left Column */
+.left-column {
+  flex: 1;
+  min-width: 280px;
+  max-width: 35%;
+  padding-right: 20px;
+}
+
+/* Right Column */
+.right-column {
+  flex: 2;
+  min-width: 300px;
+  max-width: 65%;
+}
+
+/* Make Contact Icons Wrap on Small Screens */
+.contact {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.contact p {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Responsive Fix for Mobile View */
+@media (max-width: 768px) {
+  .resume-container {
+    width: 95%;  /* Use more screen space */
+    padding: 15px;
+  }
+
+  .content {
+    flex-direction: column;
+  }
+
+  .left-column,
+  .right-column {
+    max-width: 100%;
+    padding-right: 0;
+  }
+
+  .header {
+    text-align: center;
+    padding: 15px;
+  }
+
+  .contact {
+    flex-direction: column;
+    align-items: center;
+    font-size: 13px;
+  }
+
+  .summary {
+    font-size: 14px;
+    text-align: justify;
+  }
+}

@@ -1,0 +1,143 @@
+.template2-container {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: auto;
+  border: 2px solid #000;
+  font-family: Arial, sans-serif;
+}
+
+/* Left Column (Contact, Skills, Achievements) */
+.left-column {
+  width: 35%;
+  background-color: #f4f4f4;
+  padding: 20px;
+}
+
+.left-column h2 {
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.left-column .contact-info p {
+  font-size: 14px;
+  margin: 5px 0;
+  word-break: break-word; /* Prevents text overflow */
+}
+
+.left-column .contact-info a {
+  text-decoration: none;
+  color: #007bff;
+  word-break: break-all;
+}
+
+.left-column .section {
+  margin-top: 20px;
+}
+
+.left-column .section h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.left-column .section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.left-column .section ul li {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Right Column (Summary, Education, Experience, Projects) */
+.right-column {
+  width: 65%;
+  padding: 20px;
+}
+
+.right-column .section {
+  margin-bottom: 20px;
+}
+
+.right-column .section h3 {
+  font-size: 18px;
+  border-bottom: 2px solid black;
+  padding-bottom: 5px;
+}
+
+.right-column .section h4 {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.right-column .section p {
+  font-size: 14px;
+  color: #333;
+}
+
+.right-column .section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.right-column .section ul li {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .template2-container {
+    flex-direction: column;
+    max-width: 100%;
+  }
+
+  .left-column,
+  .right-column {
+    width: 100%;
+  }
+
+  .left-column {
+    padding: 15px;
+  }
+
+  .right-column {
+    padding: 15px;
+  }
+
+  .left-column h2,
+  .right-column .section h3 {
+    font-size: 20px;
+  }
+
+  .right-column .section h4 {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .left-column,
+  .right-column {
+    padding: 10px;
+  }
+
+  .left-column h2,
+  .right-column .section h3 {
+    font-size: 18px;
+  }
+
+  .right-column .section h4 {
+    font-size: 15px;
+  }
+
+  .left-column .contact-info p,
+  .right-column .section p {
+    font-size: 13px;
+  }
+
+  .left-column .section ul li,
+  .right-column .section ul li {
+    font-size: 13px;
+  }
+}

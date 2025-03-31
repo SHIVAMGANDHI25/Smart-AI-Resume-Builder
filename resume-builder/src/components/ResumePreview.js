@@ -21,13 +21,14 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
         return <Template1 formData={formData} />; // Default template
     }
   };
+  const API_URL = process.env.REACT_APP_API_URL || "https://smart-ai-resume-builder.onrender.com"; // Fallback
 
   const handleAIResumeFeedback = async () => {
     setLoading(true);
     setFeedback(""); // Clear previous feedback
    
     try {
-      const response = await fetch("http://localhost:5000/resume-feedback", {
+      const response = await fetch(`${API_URL}/resume-feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ resumeData: formData })
@@ -50,7 +51,7 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
   };
   
   useEffect(() => {
-    fetch("/resume-feedback", {
+    fetch(`${API_URL}/resume-feedback`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ resumeData:formData })

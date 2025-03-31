@@ -83,7 +83,9 @@ const ResumeForm = ({ formData, setFormData, darkMode }) => {
           return;
       }
 
-      const response = await fetch("http://localhost:5000/generate-ai", {
+      const API_URL = process.env.REACT_APP_API_URL || "https://smart-ai-resume-builder.onrender.com"; // Fallback
+
+      const response = await fetch(`${API_URL}/generate-ai`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),

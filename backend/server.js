@@ -4,7 +4,7 @@ const cors = require("cors");
 const axios = require("axios");
 
 const app = express();
-app.use(cors({ origin: "*" }));
+app.use(cors({ origin: "smart-ai-resume-builder.vercel.app" }));
 app.use(express.json());
 
 const PORT = process.env.PORT || 5000;

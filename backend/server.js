@@ -61,6 +61,7 @@ app.post("/resume-feedback", async (req, res) => {
       Resume Data:
       ${JSON.stringify(resumeData)}
     `;
+    console.log("📤 Sending request to Gemini API with payload:", feedbackPrompt);
 
     const response = await axios.post(
       `https://generativelanguage.googleapis.com/v1/${GEMINI_MODEL}:generateContent?key=${GOOGLE_GEMINI_API_KEY}`,
@@ -77,6 +78,8 @@ res.json({ feedback: feedbackText  });
 
     
   } catch (error) {
+    console.error("❌ Error calling Gemini API:", error.response?.data || error.message);
+
     res.status(500).json({ error: "Failed to generate resume feedback.", details: error.response?.data || error.message });
   }
 });

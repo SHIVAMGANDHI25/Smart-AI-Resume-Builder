@@ -39,7 +39,7 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
       let cleanedFeedback = data.feedback
       .replace(/##\s*/g, "") 
       .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>") // Convert **bold** to <b>bold</b>
-      .replace(/[*-]\s+/g, "• ") // Replace bullet points properly
+      .replace(/[*-]\s+/g, "• ") 
       .replace(/\n/g, "<br>");
       setFeedback(cleanedFeedback)
     setShowModal(true);    

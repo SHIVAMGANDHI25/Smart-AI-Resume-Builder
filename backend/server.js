@@ -15,6 +15,11 @@ const GOOGLE_GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY;
 
 const GEMINI_MODEL = "models/gemini-1.5-pro-002";
 
+app.use((req, res, next) => {
+  console.log(`➡️ ${req.method} Request to ${req.url}`);
+  console.log("Body:", req.body);
+  next();
+});
 app.post("/generate-ai", async (req, res) => {
   try {
     const { prompt } = req.body;
@@ -41,6 +46,7 @@ app.post("/generate-ai", async (req, res) => {
 });
 
 app.post("/resume-feedback", async (req, res) => {
+  console.log("Received data:", req.body);
   try {
     const { resumeData } = req.body;
     if (!resumeData) return res.status(400).json({ error: "Resume data is required!" });

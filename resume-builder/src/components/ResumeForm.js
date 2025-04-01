@@ -59,15 +59,15 @@ const ResumeForm = ({ formData, setFormData, darkMode }) => {
   const generateAISuggestion = async (section, index = null) => {
     const key = index !== null ? `${section}-${index}` : section;
     setLoadingStates((prev) => ({ ...prev, [key]: true }));
-
+  
     try {
       let prompt = "";
       const profession = formData.profession?.trim() || "a professional in their field";
       const technologies = formData.profession?.trim() ? `using technologies of a  ${formData.profession}` : "";
-
+  
       switch (section) {
         case "summary":
-          prompt = `Write a professional summary for a ${profession}. The summary should be of around 50 words, engaging, and highlight key strengths.`;
+          prompt = `Write a professional summary for a ${profession}. The summary should be around 50 words, engaging, and highlight key strengths.`;
           break;
         case "experience":
           const jobTitle = formData.experience[index]?.jobTitle || "a job position";
@@ -79,65 +79,57 @@ const ResumeForm = ({ formData, setFormData, darkMode }) => {
                 Each point should be 20-24 words, focusing on the key features, technologies used, and impact.`;
           break;
         default:
-          setLoadingStates((prev) => ({ ...prev, [key]: false }));
-          return;
+          throw new Error("Invalid section for AI suggestion");
       }
-
+  
       const API_URL = process.env.REACT_APP_API_URL || "https://smart-ai-resume-builder.onrender.com"; // Fallback
-
+  
       const response = await fetch(`${API_URL}/generate-ai`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
       });
-
+  
       const data = await response.json();
+  
       if (response.status === 429) {
         alert("❌ AI service is temporarily unavailable due to rate limits. Please try again later.");
         return;
       }
   
       if (!response.ok) {
-        alert(`❌ Error: ${data.error || "Something went wrong"}`);
-        return;
+        throw new Error(data.error || "Something went wrong");
       }
   
       console.log("✅ AI Suggestion:", data.suggestion);
-    } catch (error) {
-      console.error("❌ Network error:", error);
-      alert("❌ Failed to fetch AI suggestion. Please check your internet connection.");
-    }
       let aiResponse = data.suggestion || "";
-
+  
       if (section === "experience") {
         aiResponse = handleBulletPointInput(section, index, "description", aiResponse);
       } else if (section === "projects") {
         aiResponse = handleBulletPointInput(section, index, "about", aiResponse);
       }
-
-      if (!aiResponse || aiResponse.trim() === "") {
-        setLoadingStates((prev) => ({ ...prev, [key]: false }));
-        return;
+  
+      if (!aiResponse.trim()) {
+        throw new Error("AI response is empty");
       }
-
+  
       setFormData((prev) => {
         const updatedData = { ...prev };
-
-        if (section === "summary") {
-          updatedData.summary = aiResponse;
-        } else if (section === "experience" && index !== null) {
-          updatedData.experience[index].description = aiResponse;
-        } else if (section === "projects" && index !== null) {
-          updatedData.projects[index].about = aiResponse;
-        }
-
+        if (section === "summary") updatedData.summary = aiResponse;
+        else if (section === "experience" && index !== null) updatedData.experience[index].description = aiResponse;
+        else if (section === "projects" && index !== null) updatedData.projects[index].about = aiResponse;
         return updatedData;
       });
+  
     } catch (error) {
+      console.error("❌ Error updating resume data:", error);
+      alert(`❌ Error: ${error.message}`);
     } finally {
       setLoadingStates((prev) => ({ ...prev, [key]: false }));
     }
   };
+  
 
 
 

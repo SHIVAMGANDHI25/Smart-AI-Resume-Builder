@@ -1,4 +1,7 @@
 require("dotenv").config();
+const NodeCache = require("node-cache");
+const cache = new NodeCache({ stdTTL: 3600 });
+const rateLimit = require("express-rate-limit");
 const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
@@ -29,7 +32,13 @@ app.use((req, res, next) => {
   console.log("Body:", req.body);
   next();
 });
-app.post("/generate-ai", async (req, res) => {
+const aiLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 5, // Limit each IP to 5 requests per window
+  message: "Too many requests to AI API, please wait and try again.",
+});
+
+app.post("/generate-ai",aiLimiter, async (req, res) => {
   try {
     const { prompt } = req.body;
 
@@ -60,6 +69,13 @@ app.post("/resume-feedback", async (req, res) => {
     const { resumeData } = req.body;
     if (!resumeData) return res.status(400).json({ error: "Resume data is required!" });
 
+    const cacheKey = JSON.stringify(resumeData);
+    const cachedFeedback = cache.get(cacheKey);
+    if (cachedFeedback) {
+      console.log("✅ Returning cached feedback");
+      return res.json({ feedback: cachedFeedback });
+    }
+    
     const feedbackPrompt = `
       Analyze this resume and provide a professional evaluation:
       - Score (out of 100) based on completeness, clarity, and professionalism.

@@ -5,7 +5,8 @@ const axios = require("axios");
 
 const app = express();
 app.use(cors({
-  origin: "https://smart-ai-resume-builder.vercel.app", // ✅ Allow your frontend
+  origin: ["https://smart-ai-resume-builder.vercel.app", "http://localhost:3000" ], // ✅ Allow your frontend
+  // origin: "*", // ✅ Allow your frontend
   methods: ["GET", "POST", "PUT", "DELETE"],  // ✅ Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"]  // ✅ Allowed headers
 }));app.use(express.json());

@@ -56,6 +56,13 @@ app.post("/generate-ai",aiLimiter, async (req, res) => {
     const aiText = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "No AI suggestion available.";
     res.json({ suggestion: aiText });
   } catch (error) {
+    console.error("❌ Error calling Gemini API:", error.response?.data || error.message);
+
+    if (error.response?.status === 429) {
+      return res.status(429).json({ 
+        error: "AI service is temporarily unavailable due to rate limits. Please try again later." 
+      });
+    }
     res.status(500).json({
       error: "Failed to generate AI suggestion.",
       details: error.response?.data || error.message,
@@ -75,7 +82,7 @@ app.post("/resume-feedback", async (req, res) => {
       console.log("✅ Returning cached feedback");
       return res.json({ feedback: cachedFeedback });
     }
-    
+
     const feedbackPrompt = `
       Analyze this resume and provide a professional evaluation:
       - Score (out of 100) based on completeness, clarity, and professionalism.

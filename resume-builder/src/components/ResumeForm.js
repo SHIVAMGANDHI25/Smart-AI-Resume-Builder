@@ -92,6 +92,21 @@ const ResumeForm = ({ formData, setFormData, darkMode }) => {
       });
 
       const data = await response.json();
+      if (response.status === 429) {
+        alert("❌ AI service is temporarily unavailable due to rate limits. Please try again later.");
+        return;
+      }
+  
+      if (!response.ok) {
+        alert(`❌ Error: ${data.error || "Something went wrong"}`);
+        return;
+      }
+  
+      console.log("✅ AI Suggestion:", data.suggestion);
+    } catch (error) {
+      console.error("❌ Network error:", error);
+      alert("❌ Failed to fetch AI suggestion. Please check your internet connection.");
+    }
       let aiResponse = data.suggestion || "";
 
       if (section === "experience") {

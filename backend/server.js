@@ -6,10 +6,18 @@ const axios = require("axios");
 const app = express();
 app.use(cors({
   origin: ["https://smart-ai-resume-builder.vercel.app", "http://localhost:3000" ], // ✅ Allow your frontend
-  // origin: "*", // ✅ Allow your frontend
   methods: ["GET", "POST", "PUT", "DELETE"],  // ✅ Allowed HTTP methods
   allowedHeaders: ["Content-Type", "Authorization"]  // ✅ Allowed headers
-}));app.use(express.json());
+}));
+
+app.options("*", (req, res) => {
+  res.header("Access-Control-Allow-Origin", req.headers.origin);
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.sendStatus(204); // No Content
+});
+
+app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 const GOOGLE_GEMINI_API_KEY = process.env.GOOGLE_GEMINI_API_KEY;

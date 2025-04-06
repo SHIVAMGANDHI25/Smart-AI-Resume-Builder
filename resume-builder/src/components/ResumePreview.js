@@ -37,11 +37,11 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
   
       const data = await response.json();
       let cleanedFeedback = data.feedback
-      .replace(/^##\s*/gm, "<b>")                   // Convert ## to <b>
-      .replace(/^(?!<b>)(.+):/gm, "<b>$1:</b>")     // Convert lines like "Section:" to bold
-      .replace(/\*\*(.*?)\*\*/g, "<b>$1</b>")       // Bold with **
-      .replace(/[*-]\s+/g, "• ")                    // Bullet points
-      .replace(/\n{2,}/g, "<br><br>")               // Double line breaks to new paragraphs
+      .replace(/^##+\s*/gm, "")                                // Remove markdown headings
+      .replace(/^\*\*(.*?)\*\*/gm, "<b>$1</b>")                // Bold entire lines like "**Score: 65/100**"git a
+      .replace(/[*-]\s*\*\*(.*?)\*\*:/g, "• <b>$1:</b>")       // Bullets with bold headers inside
+      .replace(/[*-]\s*/g, "• ")                               // All other bullet points
+      .replace(/\n{2,}/g, "<br><br>")                          // Double line breaks to <br><br>
       .replace(/\n/g, "<br>");
       setFeedback(cleanedFeedback)
     setShowModal(true);    

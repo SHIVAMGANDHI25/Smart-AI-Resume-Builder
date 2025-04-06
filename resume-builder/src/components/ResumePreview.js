@@ -55,24 +55,6 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
     }
   };
   
-  useEffect(() => {
-    fetch(`${API_URL}/resume-feedback`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ resumeData:formData })
-    })
-      .then((res) => {
-        if (!res.ok) throw new Error(`HTTP Error! Status: ${res.status}`);
-        return res.json();
-      })
-      .then((data) => {
-        setFeedback(data.feedback);
-      })
-      .catch(() => {}); 
-
-  }, );
-  
-
   return (
     <>
     <Container className="mt-4">

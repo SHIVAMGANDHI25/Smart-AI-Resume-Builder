@@ -87,7 +87,10 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
           <Modal.Title>📄 AI Resume Feedback</Modal.Title>
         </Modal.Header>
         <Modal.Body style={{ maxHeight: "60vh", overflowY: "auto", padding: "15px" }}>
-          <div dangerouslySetInnerHTML={{ __html: feedback }} />
+        <div
+  style={{ whiteSpace: "pre-line", textAlign: "left" }}
+  dangerouslySetInnerHTML={{ __html: feedback }}
+/>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>

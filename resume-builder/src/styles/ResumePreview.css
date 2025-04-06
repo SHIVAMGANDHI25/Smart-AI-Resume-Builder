@@ -48,3 +48,17 @@
     padding: 10px;
   }
 }
+div[dangerouslySetInnerHTML] h2,
+div[dangerouslySetInnerHTML] h3 {
+  font-weight: bold;
+  margin-top: 20px;
+  color: #2c3e50;
+}
+
+div[dangerouslySetInnerHTML] ul {
+  padding-left: 20px;
+}
+
+div[dangerouslySetInnerHTML] p {
+  margin-bottom: 10px;
+}

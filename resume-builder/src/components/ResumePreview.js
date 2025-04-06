@@ -1,6 +1,7 @@
 import React ,{ useState , useEffect ,  forwardRef } from "react";
 import { Container , Button , Spinner  , Modal} from "react-bootstrap";
 import { FaRobot } from "react-icons/fa";
+import { marked } from "marked";
 import Template1 from "../templates/Template1";
 import Template2 from "../templates/Template2";
 import Template3 from "../templates/Template3";
@@ -36,14 +37,16 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
       
   
       const data = await response.json();
-      let cleanedFeedback = data.feedback
-      .replace(/^##+\s*/gm, "")                                // Remove markdown headings
-      .replace(/^\*\*(.*?)\*\*/gm, "<b>$1</b>")                // Bold entire lines like "**Score: 65/100**"git a
-      .replace(/[*-]\s*\*\*(.*?)\*\*:/g, "• <b>$1:</b>")       // Bullets with bold headers inside
-      .replace(/[*-]\s*/g, "• ")                               // All other bullet points
-      .replace(/\n{2,}/g, "<br><br>")                          // Double line breaks to <br><br>
-      .replace(/\n/g, "<br>");
-      setFeedback(cleanedFeedback)
+      const htmlFeedback = marked.parse(data.feedback);
+
+      // let cleanedFeedback = data.feedback
+      // .replace(/^##+\s*/gm, "")                                // Remove markdown headings
+      // .replace(/^\*\*(.*?)\*\*/gm, "<b>$1</b>")                // Bold entire lines like "**Score: 65/100**"git a
+      // .replace(/[*-]\s*\*\*(.*?)\*\*:/g, "• <b>$1:</b>")       // Bullets with bold headers inside
+      // .replace(/[*-]\s*/g, "• ")                               // All other bullet points
+      // .replace(/\n{2,}/g, "<br><br>")                          // Double line breaks to <br><br>
+      // .replace(/\n/g, "<br>");
+      setFeedback(htmlFeedback)
     setShowModal(true);    
   } catch (error) {
       setFeedback("Error fetching AI feedback.");

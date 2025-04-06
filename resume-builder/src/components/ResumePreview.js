@@ -21,7 +21,7 @@ const ResumePreview = forwardRef(({ formData ,  selectedTemplate}, ref) => {
         return <Template1 formData={formData} />; // Default template
     }
   };
-  const API_URL = process.env.REACT_APP_API_URL || "https://smart-ai-resume-builder.onrender.com"; // Fallback
+  const API_URL = process.env.REACT_APP_API_URL || "https://smart-ai-resume-builder.onrender.com"; 
 
   const handleAIResumeFeedback = async () => {
     setLoading(true);

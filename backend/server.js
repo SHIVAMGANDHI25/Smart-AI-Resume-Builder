@@ -104,9 +104,11 @@ app.post("/resume-feedback", async (req, res) => {
     
 
     const feedbackText = response.data.candidates?.[0]?.content?.parts?.[0]?.text || "No feedback available.";
+    cache.set(cacheKey, feedbackText);
 
+    console.log("✅ Feedback received and cached");
 
-res.json({ feedback: feedbackText  });
+    return res.json({ feedback: feedbackText  });
 
     
   } catch (error) {
